@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analizador Léxico y Sintáctico</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        textarea {
+            width: 100%;
+            height: 150px;
+        }
+        .resultados {
+            margin-top: 20px;
+        }
+        .column {
+            display: inline-block;
+            width: 45%;
+            vertical-align: top;
+        }
+        button {
+            margin-right: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Analizador Léxico y Sintáctico</h1>
+    <form method="POST">
+        <label for="codigo">Ingrese su código:</label><br>
+        <textarea name="codigo" id="codigo"></textarea><br>
+        <button type="submit">Analizar</button>
+        <button type="submit" name="borrar">Borrar</button>
+    </form>
+
+    <div class="resultados">
+        <div class="column">
+            <h2>Resultado Léxico</h2>
+            {% if resultado_lexico %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Línea</th>
+                        <th>Token</th>
+                        <th>Simbolo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for linea, simbolos in resultado_lexico %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ linea }}</td>
+                        <td>{{ simbolos }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% endif %}
+        </div>
+
+        <div class="column">
+            <h2>Resultado Sintáctico</h2>
+            {% if resultado_sintactico %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Línea</th>
+                        <th>Resultado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for linea in resultado_sintactico %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ linea }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
+
